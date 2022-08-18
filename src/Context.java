@@ -1,25 +1,14 @@
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
-class App {
-    public static void main(String[] args) {
-        // Define variables
-        final String GREETING = "Hello";
-        Map<String, Boolean> options = new HashMap<>();
-        options.put("interactive", false);
-        options.put("stdin", false);
-        String name = "World";
+public class Context {
+    private String name;
 
-        // Building Application's context
-        // Check for commandline args
-        name = parseArgs(args, name, options);
-
-        // Responding to the user
-        System.out.println(GREETING + ", " + name + "!");
+    public Context(String[] args) {
+        parseArgs(args);
     }
 
-    public static String parseArgs(String[] args, String name, Map<String, Boolean> options) {
+    public void parseArgs(String[] args) {
+        String name = "World";
         if (args.length > 0) {
             // Loop through and set up flags
             for (int i = 0; i < args.length; i++) {
@@ -31,12 +20,10 @@ class App {
                         break;
                     case "--interactive":
                     case "-i":
-                        options.replace("interactive", true);
                         // Interactive mode
                         break;
                     case "--stdin":
                     case "-s":
-                        options.replace("stdin", true);
                         Scanner scanner = new Scanner(System.in);
                         if (scanner.hasNext()) {
                             name = scanner.nextLine();
@@ -48,6 +35,10 @@ class App {
                 }
             }
         } 
+        this.name = name;
+    }
+
+    public String getName() {
         return name;
     }
 }
