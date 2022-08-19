@@ -1,3 +1,5 @@
+package com.github.MehrabRahman.helloworld;
+
 public class Response {
     private String greeting;
     private String name;
